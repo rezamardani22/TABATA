@@ -1,0 +1,301 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+    background-color: #fce4ec; /* Lightest Pink */
+    cursor: default;
+}
+
+/* Partikel Bunga yang Bertebaran Terus Menerus sebagai Background */
+.floating-flower {
+    position: absolute;
+    background-color: #FFC0CB; /* Light Pink for flowers */
+    border-radius: 50%;
+    opacity: 0.8; /* Sedikit ditingkatkan opacity-nya */
+    animation: floatUp linear infinite;
+    z-index: 2;
+}
+
+/* Bentuk kelopak bunga sederhana */
+.floating-flower::before,
+.floating-flower::after {
+    content: '';
+    position: absolute;
+    background-color: inherit;
+    border-radius: 50%;
+}
+
+.floating-flower::before {
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(30deg);
+}
+
+.floating-flower::after {
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-30deg);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.9; /* Opacity maksimal saat di tengah perjalanan */
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- Halaman Pembuka --- */
+.intro-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #f8bbd0, #e0f2f7); /* Pink muda ke Biru muda */
+    overflow: hidden;
+    transition: background 1s ease-in-out;
+    z-index: 1;
+}
+
+.initial-love {
+    font-size: 15em;
+    color: #e91e63; /* Deep Pink */
+    text-shadow: 0 0 20px rgba(233, 30, 99, 0.7);
+    animation: pulse 1.5s infinite alternate;
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+}
+
+.congrats-message {
+    position: absolute;
+    z-index: 8;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.5s ease-out forwards;
+    transform: scale(0.8);
+    opacity: 0;
+    width: 80%;
+    max-width: 700px;
+}
+
+.congrats-message.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.congrats-message h1 {
+    font-size: 3.5em;
+    color: #d81b60; /* Darker Pink */
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.congrats-message p {
+    font-size: 1.8em;
+    color: #880e4f; /* Even darker pink */
+}
+
+.scroll-indicator {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #666;
+    animation: bounce 1s infinite alternate;
+}
+
+.scroll-indicator.hidden {
+    display: none;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* --- Partikel Ledakan (Saat Klik Hati) --- */
+.explosion-particle {
+    position: absolute;
+    opacity: 0;
+    animation: explodeFadeOut linear forwards;
+    transform-origin: center;
+    z-index: 9;
+}
+
+.explosion-love {
+    color: #FFC0CB; /* Light Pink */
+    font-size: 1.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.explosion-flower {
+    background-color: #f06292; /* Medium Pink for explosion flowers */
+    border-radius: 50%;
+}
+
+.explosion-flower::before,
+.explosion-flower::after {
+    content: '';
+    position: absolute;
+    background-color: inherit;
+    border-radius: 50%;
+}
+
+.explosion-flower::before {
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(30deg);
+}
+
+.explosion-flower::after {
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-30deg);
+}
+
+@keyframes explodeFadeOut {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.5) rotate(720deg);
+    }
+}
+
+/* --- Bagian Konten Setelah Klik (Scrollable) --- */
+.content-section {
+    min-height: 100vh;
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, #e0f2f7, #fce4ec); /* Biru muda ke Pink muda */
+    color: #333;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.content-section.hidden {
+    display: none;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1000px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.image-column {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 5px solid #f8bbd0; /* Pink border */
+}
+
+.text-column {
+    flex: 2;
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-column h2 {
+    font-size: 2.5em;
+    color: #d81b60; /* Darker Pink */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.text-column p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Responsif untuk Layar Kecil */
+@media (max-width: 768px) {
+    .congrats-message h1 {
+        font-size: 2.5em;
+    }
+    .congrats-message p {
+        font-size: 1.4em;
+    }
+    .initial-love {
+        font-size: 10em;
+    }
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .image-column, .text-column {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .congrats-message h1 {
+        font-size: 2em;
+    }
+    .congrats-message p {
+        font-size: 1.2em;
+    }
+    .initial-love {
+        font-size: 8em;
+    }
+    .congrats-message {
+        padding: 20px 30px;
+    }
+    .text-column {
+        padding: 20px;
+    }
+    .text-column h2 {
+        font-size: 2em;
+    }
+    .text-column p {
+        font-size: 1em;
+    }
+}
